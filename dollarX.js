@@ -9,7 +9,7 @@ function $X (exp, context, type /* want type */) {
 		context = null;
 	}
 	if (!context) context = document;
-	var exp = (context.ownerDocument || context).createExpression(exp, function (prefix) {
+	exp = (context.ownerDocument || context).createExpression(exp, function (prefix) {
 		var o = document.createNSResolver(context)(prefix);
 		if (o) return o;
 		return (document.contentType == "application/xhtml+xml") ? "http://www.w3.org/1999/xhtml" : "";
@@ -34,7 +34,7 @@ function $X (exp, context, type /* want type */) {
 				case XPathResult.UNORDERED_NODE_ITERATOR_TYPE:
 					// not ensure the order.
 					var ret = [], i = null;
-					while (i = result.iterateNext()) ret.push(i);
+					while ((i = result.iterateNext())) ret.push(i);
 					return ret;
 			}
 			return null;
